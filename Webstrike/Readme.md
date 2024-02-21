@@ -12,12 +12,12 @@ Link -> [Cyberdefend](https://cyberdefenders.org/blueteam-ctf-challenges/webstri
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/5d8a7e98-1536-47c9-b6ad-2218cc47d4a6)
 
 Tạm dịch các câu hỏi:
-1. [Tìm kiếm địa chỉ IP của người tấn công](c1)
-2. [Tìm kiếm user-agent của kẻ tấn công](c2)
-3. [Tên của webshell đã upload](c3)
-4. [Tìm kiếm directory (thư mục) để chứa file vừa được upload](c4)
-5. [Webshell được gửi tới sử dụng port nào](c5)
-6. [Kẻ tấn công đang cố gắng lấy đi tập tin nào](c6)
+1. [Tìm kiếm địa chỉ IP của người tấn công](#c1)
+2. [Tìm kiếm user-agent của kẻ tấn công](#c2)
+3. [Tên của webshell đã upload](#c3)
+4. [Tìm kiếm directory (thư mục) để chứa file vừa được upload](#c4)
+5. [Webshell được gửi tới sử dụng port nào](#c5)
+6. [Kẻ tấn công đang cố gắng lấy đi tập tin nào](#c6)
 
 # Bài làm
 ## Câu  1 <a name="c1"></a>   
