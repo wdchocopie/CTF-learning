@@ -102,3 +102,22 @@ Mình thử nhập trên chỗ nhập flag là `image.jpg.php`
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/029db335-ba29-40da-adb4-8a5c75d43c22)
 
 ## Câu 4
+
+Vì file **image.jpg.php** (webshell) đã được tải lên, mình sẽ tìm kiếm package có chứa URI dẫn tới file đó
+
+URI (Uniform Resource identifier) cơ bản là cách để nhận định tài nguyên trên web hay server nào đó. Tài nguyên ở đây có thể hiểu theo các file như file ảnh, video,.... Cấu trúc của URI bao gồm:
+* URL (Uniform resource locator) có thể hiểu đơn giản là địa chỉ chung để truy xuất tài nguyên trên mạng máy tính. URL có dạng https://www.google.com/..... trong đó:
+* * **https** là giao thức kết nối
+  * **www.google.com** là tên miền
+  * ..... Thường là đường dẫn tới file của trang web
+* URN (Uniform resource name) Cơ bản là danh tính tài nguyên ở trên server. Nó thường là ISBN và ISSN. VD: urn:isbn:0132350882
+
+Vì chúng ta có các dữ kiện trên, mình cần tìm tới đường dẫn đã lưu phần **image.jpg.php** bằng cách sử dụng filter: `http.request.full_uri contains "image.jpg.php"`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/df22bf25-da91-43b5-928e-b629ba9a6ca6)
+
+Và ta có thể thấy đường dẫn tới thư mục upload là **/reviews/uploads**. Nhập thử lên web
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/151d3f90-c1a1-439a-adfe-2e751303e4ce)
+
+## Câu 5
