@@ -12,15 +12,15 @@ Link -> [Cyberdefend](https://cyberdefenders.org/blueteam-ctf-challenges/webstri
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/5d8a7e98-1536-47c9-b6ad-2218cc47d4a6)
 
 Tạm dịch các câu hỏi:
-1. Tìm kiếm địa chỉ IP của người tấn công
-2. Tìm kiếm user-agent của kẻ tấn công
-3. Tên của webshell đã upload
-4. Tìm kiếm directory (thư mục) để chứa file vừa được upload
-5. Webshell được gửi tới sử dụng port nào
-6. Kẻ tấn công đang cố gắng lấy đi tập tin nào
+1. [Tìm kiếm địa chỉ IP của người tấn công](c1)
+2. [Tìm kiếm user-agent của kẻ tấn công](c2)
+3. [Tên của webshell đã upload](c3)
+4. [Tìm kiếm directory (thư mục) để chứa file vừa được upload](c4)
+5. [Webshell được gửi tới sử dụng port nào](c5)
+6. [Kẻ tấn công đang cố gắng lấy đi tập tin nào](c6)
 
 # Bài làm
-## Câu  1
+## Câu  1 <a name="c1"></a>   
 Vì là người tấn công thì thường là người bắt đầu gói tin, nên mình sẽ lấy địa chỉ ip source của package đầu tiên
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/e423f212-d89b-4577-99d8-89b6954aa382)
@@ -33,7 +33,7 @@ Tại đây thì mình tìm được thành phố là Tianjin thì mình thử n
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/4ea6b7ee-851a-4d8f-8cb2-ccc190c2fe08)
 
-## Câu 2
+## Câu 2 <a name="c2"></a>  
 Vì câu này hỏi về user-agent, ta sẽ cùng đi tìm hiểu qua user-agent là gì
 Về cơ bản, user-agent là thông tin bạn gửi tới server từ trình duyệt của bạn. Có thể hiểu nó là thứ để định danh bạn. Thông thường thông tim bao gồm:
 * Phiên bản của trình duyệt
@@ -66,7 +66,7 @@ Vậy mình thử nhập `Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/201001
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/027bbd49-90ac-4b97-b8c1-9b539d25214e)
 
-## Câu 3
+## Câu 3 <a name="c3"></a>  
 Sau khi đọc câu này, mình sẽ thử kiểm tra xem từ file pcap này mình có xuất ra được file nào không bằng cách vào File -> Export object -> HTTP...
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/e54534ba-f1e3-4354-b0c0-0a309b668e3e)
@@ -101,7 +101,7 @@ Mình thử nhập trên chỗ nhập flag là `image.jpg.php`
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/029db335-ba29-40da-adb4-8a5c75d43c22)
 
-## Câu 4
+## Câu 4 <a name="c4"></a>  
 
 Vì file **image.jpg.php** (webshell) đã được tải lên, mình sẽ tìm kiếm package có chứa URI dẫn tới file đó
 
@@ -120,7 +120,7 @@ Và ta có thể thấy đường dẫn tới thư mục upload là **/reviews/u
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/151d3f90-c1a1-439a-adfe-2e751303e4ce)
 
-## Câu 5
+## Câu 5 <a name="c5"></a>  
 
 Với câu này, để xem phần webshell đã sử dụng port nào thì chúng ta chỉ cần check source code của nó. Vậy thì mình sẽ tiến hành xuất nó ra khỏi file pcap bằng cách vào File -> Export object -> HTTP...-> Chọn file (package 63) và Save.
 
@@ -139,7 +139,7 @@ Vậy mình thử nhập 8080 vào chỗ điền flag
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/508265b5-11cd-4909-8f55-e4af3edf65f4)
 
-## Câu 6
+## Câu 6 <a name="c6"></a>  
 
 Tại đây, ta có 2 thông tin sau:
 * Vì ta đã biết webshell đang sử dụng Netcat nên ta có thể giới hạn lại giao thức là **tcp** hoặc **udp**.
