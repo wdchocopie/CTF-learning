@@ -98,3 +98,5 @@ Tại package 63 có 1 đoạn hiển thị `filename=image.jpg.php`. Mình đo�
 Mình thử nhập trên chỗ nhập flag là `image.jpg.php`
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/029db335-ba29-40da-adb4-8a5c75d43c22)
+
+## Câu 4
