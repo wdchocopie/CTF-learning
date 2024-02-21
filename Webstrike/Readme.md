@@ -93,7 +93,7 @@ Mình sẽ tiến hành kiểm tra 2 mục này của cả 2 package 53 và 63
 
 Tại package 63 có 1 đoạn hiển thị `filename=image.jpg.php`. Mình đoán cái này chính là đáp án với 2 lí do:
 * Đoạn này giống như là đang cố gắng lừa người đây là 1 file hình ảnh vậy.
-* Dạng của flag là *****.***.***
+* Dạng của flag là (*****.***.***)
 
 Mình thử nhập trên chỗ nhập flag là `image.jpg.php`
 
