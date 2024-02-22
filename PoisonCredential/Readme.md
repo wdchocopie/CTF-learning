@@ -30,10 +30,11 @@ Tạm dịch các câu hỏi:
 
 **LLMNR** và **NBT-NS** có thể triển khai thành Poisoning attack bằng cách lợi dụng việc client gửi sai SMB share adress, khi này DNS sẽ trả về kết quả không thấy địa chỉ đó. Sau đó hệ thông máy tính của client sẽ tự động đổi qua LLMNR / NBT-NS request và kẻ tấn công có thể lợi dụng điều đó để tạo ra server xác nhận rằng đúng địa chỉ, từ đó có thể lấy credential của người dùng.
 
-**Mô phòng cuộc tấn công **
+**Mô phòng cuộc tấn công**
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/32745f68-1906-4805-922a-44f6a1c309aa)
 
+Gửi sai địa chỉ SMB ->  DNS trả về không tìm thấy -> Client gửi request LLMNR/NBT-NS -> Kẻ tấn công lợi dụng nó để kết nối với máy của clients 
 
 ----
 # Câu 1
