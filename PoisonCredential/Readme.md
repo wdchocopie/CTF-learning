@@ -43,3 +43,22 @@ Tại câu hỏi này, ta có thể suy đoán như sau:
 * Cả LLMNR, NBNS và SMB đều sử dụng query-respond mechanism (tạm dịch: cơ chế truy vấn). Nên mình sẽ filter 3 cái này
 
 Vậy thì mình sẽ tiến hành kiểm tra thử từng protocol với địa chỉ ip 192.168.232.162
+
+**SNB**
+`ip.src==192.168.232.162 and smb`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/f284077f-b404-416e-8f4c-1b00b9e4fa79)
+
+**LLMNR**
+`ip.src==192.168.232.162 and llmnr`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/e3638918-e94f-4e47-83f3-1f7773ab2db2)
+
+**NBNS**
+`ip.src==192.168.232.162 and nbns`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/efb4add4-7f57-4aa5-a488-ceec3905ff98)
+
+Tại đây ta thấy ở package 47 của filter NBNS có 1 phần ghi `Name query NB FILESHAARE<20>`, mình thử điền flag là `FILESHAARE`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/6c6bc8ab-da7f-47ae-9a33-bfc0cc932b53)
