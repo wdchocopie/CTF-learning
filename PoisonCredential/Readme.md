@@ -20,7 +20,7 @@ Tạm dịch các câu hỏi:
 5. Hostname của máy bị kẻ tấn công thông qua SMB
 
 ----
-#lí thuyết cần tìm hiểu trước khi vào bài
+# Lí thuyết cần tìm hiểu trước khi vào bài
 **NetBios**(Network Basic Input/Output System): Là 1 giao thức cho phép các phần mềm nằm trên các máy khác nhau trong cùng mạng LAN giao tiếp với nhau.
 **NBNS**(NetBios Name Service): là 1 giao thức sử dụng cho NetBios trên giao thức TCP/IP cho phép bạn chuyển đổi tên trên NetBios thành địa chỉ IP
 **LLMNR**(Link-Local Multicast Name Resolution): là 1 giao thức để xử lí tên trên NetBios trên mạng LAN
