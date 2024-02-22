@@ -40,4 +40,6 @@ Gửi sai địa chỉ SMB ->  DNS trả về không tìm thấy -> Client gửi
 # Câu 1
 Tại câu hỏi này, ta có thể suy đoán như sau:
 * Vì scenario đã cung cấp cho chúng ta 2 giao thức là LLMNR và NBT-NS nên khả năng cao sẽ tập trung ở đây
-* 
+* Cả LLMNR, NBNS và SMB đều sử dụng query-respond mechanism (tạm dịch: cơ chế truy vấn). Nên mình sẽ filter 3 cái này
+
+Vậy thì mình sẽ tiến hành kiểm tra thử từng protocol với địa chỉ ip 192.168.232.162
