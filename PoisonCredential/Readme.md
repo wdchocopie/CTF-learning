@@ -104,6 +104,7 @@ Tại đây ta thấy:
 * Địa chỉ 192.168.232.176 nhận được nhiều package, có `name query respond` và `registeration respond` từ  / tới 192.168.232.176
 
 => Ta có thể suy ra flag ta cần tìm là **192.168.232.176**
+
 Thử nhập flag vào
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/da337b64-2013-4241-b527-6c0781820ba2)
