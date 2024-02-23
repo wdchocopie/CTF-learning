@@ -22,8 +22,11 @@ Tạm dịch các câu hỏi:
 ----
 # Lí thuyết cần tìm hiểu trước khi vào bài
 **NetBios**(Network Basic Input/Output System): Là 1 giao thức cho phép các phần mềm nằm trên các máy khác nhau trong cùng mạng LAN giao tiếp với nhau.
+
 **NBNS**(NetBios Name Service): là 1 giao thức sử dụng cho NetBios trên giao thức TCP/IP cho phép bạn chuyển đổi tên trên NetBios thành địa chỉ IP
+
 **LLMNR**(Link-Local Multicast Name Resolution): là 1 giao thức để xử lí tên trên NetBios trên mạng LAN
+
 **SMB**(Server Message Block): Là giao thức chia sẻ file của Windows.
 
 **LLMNR** và **NBT-NS** được sử dụng khi DNS request fail trên hệ thông của Windows. Khi đó 2 giao thức này sẽ đóng vai trò như name resolution dự phòng (fallback name resolution)
