@@ -36,6 +36,8 @@ Tạm dịch các câu hỏi:
 
 Gửi sai địa chỉ SMB ->  DNS trả về không tìm thấy -> Client gửi request LLMNR/NBT-NS -> Kẻ tấn công lợi dụng nó để kết nối với máy của clients 
 
+https://github.com/wdchocopie/CTF-learning/assets/81132394/7f2e2c86-0e45-4909-a6b7-a8702bf347d8
+
 ----
 # Câu 1
 Tại câu hỏi này, ta có thể suy đoán như sau:
