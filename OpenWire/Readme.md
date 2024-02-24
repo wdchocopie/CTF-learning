@@ -1,4 +1,4 @@
-![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/bef6c0bc-3b6a-4905-96ff-2fa214f5c4ba)# OpenWire - Week 1
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/98fc8d08-19c7-4631-a9c6-7e4e14c732aa)# OpenWire - Week 1
 Tool sử dụng trong bài:
 * Google
 * Wireshark
@@ -68,11 +68,11 @@ Kết hợp thêm dữ kiện số lượng packet lớn từ **146.190.21.92** 
 
 **Bổ sung dữ kiện**
 
-Sau khi mình để ý lại 1 tí thì mình có thấy packet số 11 và số 14 là có request (GET) từ địa chỉ **134.209.197.3** tới **146.190.21.92**. Khả năng cao đây là file mã độc.
+Sau khi mình để ý lại 1 tí thì mình có thấy packet số 11 và số 14 là có request (GET) từ địa chỉ **134.209.197.3** tới **146.190.21.92**. File XML này sẽ truyền dữ liệu và mô tả nhiều loại dữ liệu khác nhau.
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/47fdd067-17c8-4f27-9f8f-9f3c49efe511)
 
-
+  
 ----
 # Câu 2
 Để tìm port đang bị Exploit, mình cần xem xem kẻ tấn công sử dụng gì để Exploit server.
@@ -113,6 +113,65 @@ Tại đây mình thấy packet số 34 và 38 tương tự như **Dữ kiện b
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/79bd8b33-cf14-46ef-ac34-28c4faec50cc)
 
+Hoặc tương tự với đó, mình sẽ follow stream của packet số 11 và thấy trong file XML có cái này
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/753c72bf-ee42-4fb6-85bf-2e14f0547089)
+
+Ta thấy địa chỉ ip đó được curl về 1 file. Và khả năng cao file này là mã độc vì nó cần cấp quyền thực thi (chmod +x). Cũng theo phỏng đoán thì server này cũng có thể là server C2 thứ 2
+
 ----
 # Câu 5
+Theo dữ kiện của phầm **Dữ kiện bổ sung** trong câu 1, phần làm của câu 4, mình sẽ quay lại packet số 11 để follow stream nhằm mục đích xem file XML đã được gửi về.
 
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/1f9ae294-d992-41cc-95ed-60d7d6929879)
+
+Ta có thể thấy lệnh `chmod +x /tmp/docker` tức cấp quyền thực thi cho file tên `docker`. Mình thử nhập vào trong ô nhập flag
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/17933a11-10ec-468c-abf0-1bd62f81f922)
+
+----
+# Câu 6
+Tại file XML, có 1 dòng là `<bean id="pb" class="java.lang.ProcessBuilder" init-method="start">`. Trong này có 1 thuộc tính là `java.lang.ProcessBuilder` và với các dữ kiện đã thu thập, nhiều khả năng đây là cái Java class cần tìm. Thử nhập nó nó vào Cyberdefend
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/71e70628-7a18-424b-a594-e193c9df981e)
+
+**Bổ sung thêm dữ kiện**
+
+Class này được sử dụng như để tạo 1 process trên hệ thống của bạn. Và chúng ta có thêm thuộc tính `init-method="start"` thì cái này sẽ tạo và chạy 1 process gì đó. 
+
+Trong này cũng có <bean> - là cái mà [spring Ioc container](https://viblo.asia/p/spring-ioc-inversion-of-control-trong-spring-4P856gJaKY3) quản lí. IoC container sẽ tạo các đối tượng, lắp rắp chúng lại với nhau, cấu hình các đối tượng và quản lý vòng đời của chúng từ lúc tạo ra cho đến lúc bị hủy.
+
+Và tất cả những cái này sẽ build thành 1 process chạy các dòng trong <constructor-arg></constructor-arg>
+
+----
+# Câu 7
+Google 1 cách nhanh nhất thì ta có thể search như sau
+
+`openwire cve`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/053c49aa-a1f4-49ac-ac54-4097aeaf403f)
+
+Thử nhập `CVE-2023-46604 ` vào
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/ce4c39c9-34f1-44ed-ba69-d6d8cf691cec)
+
+----
+# Câu 8
+Câu này mamng 1 chút về phần research. Tại trang [trendmicro](https://www.trendmicro.com/en_us/research/23/k/cve-2023-46604-exploited-by-kinsing.html), họ có nói và giải thích qua về lỗ hổng CVE-2023-46604
+
+Hiểu đơn giản về mã này là khi không thể xác thực class type của Throwable thì nó có tạo và thực thi bất kì instance của bất kì class nào. Và trong phần patch diffrent, thì method `validateIsThrowable` đã được thêm vào trong class `BaseDataStreamMarshall `. 
+
+Trong Cyberdefend, họ yêu cầu dạng flag là `class.method` nên chắc flag sẽ là `BaseDataStreamMarshall.validateIsThrowable` nhưng khi nhập thử thì không phải. Mình thử đọc lại phần ảnh trong trang blog trên thì thấy `private Throwable createThrowable`. Vì khi tạo xong mà k xác thực được thì mới xảy ra CVE-2023-46604.
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/c37e193d-992c-40c3-b174-1934b44af8f8)
+
+Theo như đầu đề của CyberDefend, mình cần tìm Java method và Class cho phép kẻ tấn công chạy mã độc nên chắc chắn flag phải là `BaseDataStreamMarshaller.createThrowable`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/accaaf03-f0b5-48a3-878a-d56cbd423722)
+
+----
+# End of Challenge check
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/0fbf1d93-ba53-4033-ae78-3c51885819b6)
+
+**--End--**
