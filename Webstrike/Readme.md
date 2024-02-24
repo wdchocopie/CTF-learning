@@ -22,7 +22,7 @@ Tạm dịch các câu hỏi:
 
 # Bài làm
 ## Câu  1 <a name="c1"></a>   
-Vì là người tấn công thì thường là người bắt đầu gói tin, nên mình sẽ lấy địa chỉ ip source của package đầu tiên
+Vì là người tấn công thì thường là người bắt đầu gói tin, nên mình sẽ lấy địa chỉ ip source của packet đầu tiên
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/e423f212-d89b-4577-99d8-89b6954aa382)
 
@@ -51,7 +51,7 @@ Vậy ta có câu lệnh để lọc:
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/ebf2e91e-f4c8-4657-934a-bd8b6afe7f50)
 
-Mình xem thử 1 package, trong phần transmission control protocol (TCP) -> HyperText transfer protocol (Http) -> user-agent sẽ có đoạn string mình cần tìm 
+Mình xem thử 1 packet, trong phần transmission control protocol (TCP) -> HyperText transfer protocol (Http) -> user-agent sẽ có đoạn string mình cần tìm 
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/37e1ba2e-1c63-46a5-9a71-1e4f366eae3f)
 
@@ -72,29 +72,29 @@ Sau khi đọc câu này, mình sẽ thử kiểm tra xem từ file pcap này m�
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/e54534ba-f1e3-4354-b0c0-0a309b668e3e)
 
-Tại đây mình thấy 2 file đáng ngờ với dạng content là **multipart/form-data** tại package 53 và 63. Mình sẽ tiến hành kiểm tra 2 Package này. Điều cần chú ý ở đây là tại mục Multipart media encapsulation xem có cái gì liên quan tới tên file không
+Tại đây mình thấy 2 file đáng ngờ với dạng content là **multipart/form-data** tại packet 53 và 63. Mình sẽ tiến hành kiểm tra 2 packet này. Điều cần chú ý ở đây là tại mục Multipart media encapsulation xem có cái gì liên quan tới tên file không
 
-**Package 53**
+**packet 53**
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/6ccc999f-f897-480b-819c-4b6097e99792)
 
-**Package 63**
+**packet 63**
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/46a3cdaf-f773-42f7-bfa0-0980d093bb6b)
 
 Tại đây mình tìm thấy 1 phần khá đáng ngờ là **(application/X-php)**. Cái này còn được gọi là MIME (Multipurpose internet mail extension) dùng để trao đổi file với mail. Tại đây là đang trao đổi với file PHP
 
-Mình sẽ tiến hành kiểm tra 2 mục này của cả 2 package 53 và 63
+Mình sẽ tiến hành kiểm tra 2 mục này của cả 2 packet 53 và 63
 
-**Package 53**
+**packet 53**
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/41f1b07a-312b-468b-9012-86fd6a0d99ea)
 
-**Package 63**
+**packet 63**
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/f692d0a2-c3e2-451d-b51a-b3b49dc60d5a)
 
-Tại package 63 có 1 đoạn hiển thị `filename=image.jpg.php`. Mình đoán cái này chính là đáp án với 2 lí do:
+Tại packet 63 có 1 đoạn hiển thị `filename=image.jpg.php`. Mình đoán cái này chính là đáp án với 2 lí do:
 * Đoạn này giống như là đang cố gắng lừa người đây là 1 file hình ảnh vậy.
 * Dạng của flag là \*\*\*\*\*.\*\*\*.\*\*\*
 
@@ -104,7 +104,7 @@ Mình thử nhập trên chỗ nhập flag là `image.jpg.php`
 
 ## Câu 4 <a name="c4"></a>  
 
-Vì file **image.jpg.php** (webshell) đã được tải lên, mình sẽ tìm kiếm package có chứa URI dẫn tới file đó
+Vì file **image.jpg.php** (webshell) đã được tải lên, mình sẽ tìm kiếm packet có chứa URI dẫn tới file đó
 
 URI (Uniform Resource identifier) cơ bản là cách để nhận định tài nguyên trên web hay server nào đó. Tài nguyên ở đây có thể hiểu theo các file như file ảnh, video,.... Cấu trúc của URI bao gồm:
 * URL (Uniform resource locator) có thể hiểu đơn giản là địa chỉ chung để truy xuất tài nguyên trên mạng máy tính. URL có dạng https://www.google.com/..... trong đó:
@@ -123,7 +123,7 @@ Và ta có thể thấy đường dẫn tới thư mục upload là **/reviews/u
 
 ## Câu 5 <a name="c5"></a>  
 
-Với câu này, để xem phần webshell đã sử dụng port nào thì chúng ta chỉ cần check source code của nó. Vậy thì mình sẽ tiến hành xuất nó ra khỏi file pcap bằng cách vào File -> Export object -> HTTP...-> Chọn file (package 63) và Save.
+Với câu này, để xem phần webshell đã sử dụng port nào thì chúng ta chỉ cần check source code của nó. Vậy thì mình sẽ tiến hành xuất nó ra khỏi file pcap bằng cách vào File -> Export object -> HTTP...-> Chọn file (packet 63) và Save.
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/58ea1db0-e6fa-44bb-976b-f3caeffe215f)
 
@@ -152,7 +152,7 @@ Vậy ta sẽ có filter như sau:
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/39d3c58d-e559-4948-85fc-e5974ab621c9)
 
-Tại đây mình tiến hành follow stream của package trên này. Bằng cách này chúng ta có thể biết kẻ tấn công của chúng ta đã giao tiếp gì với server
+Tại đây mình tiến hành follow stream của packet trên này. Bằng cách này chúng ta có thể biết kẻ tấn công của chúng ta đã giao tiếp gì với server
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/4f64d582-b887-4cf0-a6aa-233520a44adf)
 
