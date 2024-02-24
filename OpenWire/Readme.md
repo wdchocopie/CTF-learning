@@ -1,4 +1,4 @@
-![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/98fc8d08-19c7-4631-a9c6-7e4e14c732aa)# OpenWire - Week 1
+# OpenWire - Week 1
 Tool sử dụng trong bài:
 * Google
 * Wireshark
