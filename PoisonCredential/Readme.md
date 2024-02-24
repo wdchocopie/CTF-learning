@@ -133,7 +133,8 @@ Mình thử nhập vào ô flag
 
 **Bổ sung thêm kiến thức**: Lí dó mình biết được nó nằm trong trong NTLMSSP vì ở phần info nó đã hiện `NTLMSSP_AUTH`. NTLM là security protocol từ Microsoft để xác mình user's identity (danh tính người dùng) và bảo mật chúng. Vậy nếu muốn tìm thông tin liên quan tới victim thì ta sẽ tìm ở trong này.
 
-![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/51dda28c-0762-45ef-b5ab-071630bdcf62)
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/49e49745-9126-48cd-9a2b-d33086de1d12)
+
 
 ----
 # câu 5
