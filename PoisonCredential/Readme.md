@@ -59,11 +59,11 @@ Vậy thì mình sẽ tiến hành kiểm tra thử từng protocol với địa
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/efb4add4-7f57-4aa5-a488-ceec3905ff98)
 
-Tại đây ta thấy ở package 47 của filter NBNS có 1 phần ghi `Name query NB FILESHAARE<20>`, mình thử điền flag là `FILESHAARE`
+Tại đây ta thấy ở packet 47 của filter NBNS có 1 phần ghi `Name query NB FILESHAARE<20>`, mình thử điền flag là `FILESHAARE`
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/6c6bc8ab-da7f-47ae-9a33-bfc0cc932b53)
 
-Bổ sung thêm thông tin dựa vào các package từ wireshark, ta có thể thấy giao thức **NBNS** sẽ tập trung vào name query (respond) còn **LLMNR** sẽ tập trung vào standard query (respond).
+Bổ sung thêm thông tin dựa vào các packet từ wireshark, ta có thể thấy giao thức **NBNS** sẽ tập trung vào name query (respond) còn **LLMNR** sẽ tập trung vào standard query (respond).
 
 ----
 # Câu 2
@@ -76,7 +76,7 @@ Mình sẽ tiến hành kiểm tra bằng cách filter **LLMNR**
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/900b3d52-0548-4470-bdbc-35be51b2788b)
 
-Tại đây ta thấy package số 53, 54, 71, 72,..... đều từ địa chỉ **192.168.232.215** gửi về. Mình sẽ thử nhập địa chỉ ip này vào nơi điền flag
+Tại đây ta thấy packet số 53, 54, 71, 72,..... đều từ địa chỉ **192.168.232.215** gửi về. Mình sẽ thử nhập địa chỉ ip này vào nơi điền flag
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/0964ae3d-65d7-4aa6-b22e-d4f3cc21e986)
 
@@ -98,15 +98,15 @@ Và cả 2 địa chỉ này đều tương ứng với 2 cái query bị sai:
 * fileshaare
 * prinetr
 
-Vậy thì mình sẽ tiến hành kiểm tra lại xem có package nào đi từ / tới địa chỉ **192.168.232.215** thông qua protocol NBNS (để kiểm tra theo tên)
+Vậy thì mình sẽ tiến hành kiểm tra lại xem có packet nào đi từ / tới địa chỉ **192.168.232.215** thông qua protocol NBNS (để kiểm tra theo tên)
 
 `(nbns) and (ip.src==192.168.232.215 or ip.dst==192.168.232.215)`
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/3bc98de6-86b2-476a-83b1-539ebf953a88)
 
 Tại đây ta thấy:
-* Địa chỉ 192.168.232.162 chỉ có 1 package là nhận respond của 192.168.232.215 và không có phản hồi
-* Địa chỉ 192.168.232.176 nhận được nhiều package, có `name query respond` và `registeration respond` từ  / tới 192.168.232.176
+* Địa chỉ 192.168.232.162 chỉ có 1 packet là nhận respond của 192.168.232.215 và không có phản hồi
+* Địa chỉ 192.168.232.176 nhận được nhiều packet, có `name query respond` và `registeration respond` từ  / tới 192.168.232.176
 
 => Ta có thể suy ra flag ta cần tìm là **192.168.232.176**
 
@@ -116,14 +116,14 @@ Thử nhập flag vào
 
 ----
 # Câu 4
-Ở đây người ta dùng từ **Account compromised** thì tức là attacker đã phát động tấn công SMB relay. Mình sẽ tiến hành lọc các package sử dụng protocol SMB và SMB2
+Ở đây người ta dùng từ **Account compromised** thì tức là attacker đã phát động tấn công SMB relay. Mình sẽ tiến hành lọc các packet sử dụng protocol SMB và SMB2
 với ip source là 192.168.232.215
 
 `(smb or smb2) and ip.src==192.168.232.215`
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/2efc9eff-1092-4461-9077-14d82c1a26d1)
 
-Tại đây ta thấy Package số 242 có đoạn info như sau: `Session Setup Request, NTLMSSP_AUTH, User: cybercactus.local\janesmith`
+Tại đây ta thấy packet số 242 có đoạn info như sau: `Session Setup Request, NTLMSSP_AUTH, User: cybercactus.local\janesmith`
 
 Mình tiến hành kiểm tra packagae này. Trong mục SMB2 -> SMB2 header -> Security Blob -> GSS-API => simple protected negotiation -> negTokenTarg -> NTLM secure service provider ta có thể thấy phần User name là `janesmith`
 
@@ -146,7 +146,7 @@ Như kiến thức vừa đề cập ở trên và với yêu cầu đề bài, 
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/3da0fbce-c90b-43d7-87c6-cc7d40edd1ba)
 
-Tại đây ta thấy 3 package phù hợp với phần filter của ta là package 240, 241, 242. Ta thấy package của 241 là response. Mình sẽ thử kiểm tra Security Blob -> GSS-API -> Simple Protected Negotiation -> negTokenTarg -> Target Info. Tại đây mình thấy có NetBios computer name là `ACCOUNTINGPC`. Mình thử nhập vào phần điền flag
+Tại đây ta thấy 3 packet phù hợp với phần filter của ta là packet 240, 241, 242. Ta thấy packet của 241 là response. Mình sẽ thử kiểm tra Security Blob -> GSS-API -> Simple Protected Negotiation -> negTokenTarg -> Target Info. Tại đây mình thấy có NetBios computer name là `ACCOUNTINGPC`. Mình thử nhập vào phần điền flag
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/594b7de1-f707-4e6f-8a2a-70259f9bed90)
 
