@@ -113,3 +113,27 @@ Tại đây ta thấy:
 Thử nhập flag vào
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/da337b64-2013-4241-b527-6c0781820ba2)
+
+----
+# Câu 4
+Ở đây người ta dùng từ **Account compromised** thì tức là attacker đã phát động tấn công SMB relay. Mình sẽ tiến hành lọc các package sử dụng protocol SMB và SMB2
+với ip source là 192.168.232.215
+
+`(smb or smb2) and ip.src==192.168.232.215`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/2efc9eff-1092-4461-9077-14d82c1a26d1)
+
+Tại đây ta thấy Package số 242 có đoạn info như sau: `Session Setup Request, NTLMSSP_AUTH, User: cybercactus.local\janesmith`
+
+Mình tiến hành kiểm tra packagae này. Trong mục SMB2 -> SMB2 header -> Security Blob -> GSS-API => simple protected negotiation -> negTokenTarg -> NTLM secure service provider ta có thể thấy phần User name là `janesmith`
+
+Mình thử nhập vào ô flag
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/ca04bff3-fe6d-4081-9f06-d1596137ffdc)
+
+**Bổ sung thêm kiến thức**: Lí dó mình biết được nó nằm trong trong NTLMSSP vì ở phần info nó đã hiện `NTLMSSP_AUTH`. NTLM là security protocol từ Microsoft để xác mình user's identity (danh tính người dùng) và bảo mật chúng. Vậy nếu muốn tìm thông tin liên quan tới victim thì ta sẽ tìm ở trong này.
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/51dda28c-0762-45ef-b5ab-071630bdcf62)
+
+----
+# câu 5
