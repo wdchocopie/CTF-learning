@@ -1,4 +1,4 @@
-# Poison Credential - Week 1
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/15a675b0-a588-4586-ba5e-977462e7541d)# Poison Credential - Week 1
 Tool sử dụng trong bài: Wireshark
 
 Scenario: Nhóm bảo mật của tổ chức bạn đã phát hiện thấy hoạt động mạng đáng ngờ gia tăng. Có những lo ngại rằng các cuộc tấn công LLMNR (Link-Local Multicast Name Resolution) và NBT-NS (NetBios Name Service) có thể đã xảy ra. Những cuộc tấn công này được biết đến với việc khai thác các giao thức này để chặn lưu lượng mạng và có khả năng xâm phạm thông tin xác thực của người dùng. Nhiệm vụ của bạn là điều tra nhật ký mạng và kiểm tra lưu lượng truy cập mạng đã ghi lại.
@@ -135,6 +135,24 @@ Mình thử nhập vào ô flag
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/49e49745-9126-48cd-9a2b-d33086de1d12)
 
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/2bb68606-ef23-4efb-9799-5fd6d932d3f1)
 
 ----
 # câu 5
+
+Như kiến thức vừa đề cập ở trên và với yêu cầu đề bài, mình sẽ tiến hành filter **SMB2** và **NTLMSSP**
+
+`smb2 and ntlmssp`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/3da0fbce-c90b-43d7-87c6-cc7d40edd1ba)
+
+Tại đây ta thấy 3 package phù hợp với phần filter của ta là package 240, 241, 242. Ta thấy package của 241 là response. Mình sẽ thử kiểm tra Security Blob -> GSS-API -> Simple Protected Negotiation -> negTokenTarg -> Target Info. Tại đây mình thấy có NetBios computer name là `ACCOUNTINGPC`. Mình thử nhập vào phần điền flag
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/594b7de1-f707-4e6f-8a2a-70259f9bed90)
+
+----
+# End of challenge check
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/6974b614-1dea-449a-b9c6-a9e1cdfb5d5e)
+
+**--End--**
