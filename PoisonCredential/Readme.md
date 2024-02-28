@@ -138,7 +138,7 @@ Mình thử nhập vào ô flag
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/2bb68606-ef23-4efb-9799-5fd6d932d3f1)
 
 ----
-# câu 5
+# Câu 5
 
 Như kiến thức vừa đề cập ở trên và với yêu cầu đề bài, mình sẽ tiến hành filter **SMB2** và **NTLMSSP**
 
