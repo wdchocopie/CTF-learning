@@ -210,6 +210,11 @@ Mình dự đoán đây là flag mà mình cần tìm, mình tiến hành nhập
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/2cc6c888-76a6-495b-89ed-cb843fc91aa7)
 
+**Bổ sung cách tìm flag**
+Chúng ta cũng có thể tìm flag bằng cách sử dụng thêm tool bên ngoài là Network Miner (với điều kiện đổi file từ Pcapng -> pcap)
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/246c18d6-a44a-46a7-a04a-727b59b81b47)
+
 ----
 # End of challenge check
 
