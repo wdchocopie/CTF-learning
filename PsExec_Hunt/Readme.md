@@ -122,7 +122,8 @@ Vậy thì `psexesvc` có vẻ là tên của file này do theo yêu cầu flag 
 **Bổ sung kiến thức**
 Dưới đây là cấu trúc của SMB2 Header
 
-`+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+```
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |     0xFE      |      'S'      |      'M'      |      'B'      |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |          Header Length        |           (padding)           |
@@ -154,7 +155,8 @@ Dưới đây là cấu trúc của SMB2 Header
 |                                                               |
 +-+-+-+-+                                               +-+-+-+-+
 |                                                               |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ `
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 
+```
 
 Ta sẽ tập trung vào trong phần Tree ID. TreeID thường hay dùng để nhận diện share resource. Tóm tắt sơ qua thì nó sẽ có dạng `buffercode / sharename(\\host\sharename)` 
 
