@@ -44,7 +44,7 @@ Dựa theo những thông tim vừa tìm hiểu được về PsExec thì mình 
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/b0eb6b5c-f280-4475-83ee-907306b33a23)
 
-Tại đây ta thấy package số 130 là `NTLMSSP_NEGOTIATE` với ip source là `10.0.0.130`. Dựa vào kiến thức đã có từ bài [PoisonCredential](https://github.com/wdchocopie/CTF-learning/tree/main/PoisonCredential) thì ta có thể xác định luôn đây là ip cần tìm.
+Tại đây ta thấy packet số 130 là `NTLMSSP_NEGOTIATE` với ip source là `10.0.0.130`. Dựa vào kiến thức đã có từ bài [PoisonCredential](https://github.com/wdchocopie/CTF-learning/tree/main/PoisonCredential) thì ta có thể xác định luôn đây là ip cần tìm.
 
 Thử nhập nó vào ô điền flag
 
@@ -56,7 +56,7 @@ Tại đây ta sẽ có thêm 1 dữ kiện nữa là ip đang đóng vai trò s
 
 ----
 # Câu 2
-Vẫn dựa theo kiến thức về NTLM thì mình cần tìm package có chứa các thông tin sau
+Vẫn dựa theo kiến thức về NTLM thì mình cần tìm packet có chứa các thông tin sau
 * Giao thức SMB2
 * NTLMSSP
 * Bước challenge (do nó sẽ chứa thông tin của máy)
@@ -68,7 +68,7 @@ Vậy ta có filter là
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/6f906888-b0ca-4476-b4bb-6b60a953b6f7)
 
-Nhìn kĩ vào package thì ta thấy
+Nhìn kĩ vào packet thì ta thấy
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/829c9726-cef9-4668-9cd1-e1d212f4dab5)
 
@@ -119,3 +119,101 @@ Vậy thì `psexesvc` có vẻ là tên của file này do theo yêu cầu flag 
 
 ----
 # Câu 5
+**Bổ sung kiến thức**
+Dưới đây là cấu trúc của SMB2 Header
+
+`+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     0xFE      |      'S'      |      'M'      |      'B'      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Header Length        |           (padding)           |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                          NT_Status                            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|            Opcode             |            (padding)          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|       :S:C:P:R|               |               |               |    Flags
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                          Chain Offset                         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                        Command Sequence-                      |
++-+-+-+-+-+-+                                     +-+-+-+-+-+-+-+
+|                             Number                            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                           Process ID                          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                            Tree ID                            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
++-+-+-+-+                    User ID                    +-+-+-+-+
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
++-+-+-+-+                                               +-+-+-+-+
+|                                                               |
++-+-+-+-+                   Signature                   +-+-+-+-+
+|                                                               |
++-+-+-+-+                                               +-+-+-+-+
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ `
+
+Ta sẽ tập trung vào trong phần Tree ID. TreeID thường hay dùng để nhận diện share resource. Tóm tắt sơ qua thì nó sẽ có dạng `buffercode / sharename(\\host\sharename)` 
+
+Và với yêu cầu đề bài này thì nói lại sẽ là đi tìm sharename mà PsExec dùng để tải service lại về náy. Ta quay lại check packet 144 mà vừa check ở câu 4. Trong mục SMB2 -> SMB2 Header -> Tree Id, ta có những thông tin như sau.
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/39197247-0212-4ba5-920d-7c998f811d35)
+
+Sharename trong này là `ADMIN$` và cũng có thể là flag. Mình nhập thử vào và kết quả.
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/5bf691d4-c1f4-411f-9e17-6b05c2b8e603)
+
+**Bổ sung thêm thông tin**
+
+Khi sharename có dạng \[tên$\] thì nó sẽ tạo hidden share (theo [hatoffsecurity](https://hatsoffsecurity.com/2018/01/11/smb-tree-connect-response-details/)) và khi bạn về \\servername\ thì cũng sẽ không thấy phần hidden share.
+
+----
+# Câu 6
+Vẫn lọc như câu số 4, ta có:
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/7a1e0be5-0683-480f-a73d-cdc46f336955)
+
+Mình sẽ tập trung vào tìm sharename của những request liên quan tới stdin/out/err (standard in / out / error). Check thử packet số 499 với vị trí như câu 5, ta thấy
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/15da7bba-6d09-4170-9113-db52125008c8)
+
+Mình thấy được sharename `IPC$`, thử nhập vào nơi điền flag.
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/0a529565-8e23-438b-b153-42aeebfe050c)
+
+----
+# Câu 7
+Để tiến hành lấy được hostname, mình sẽ filter như sau
+
+`ntlmssp.challenge.target_info`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/6102f242-709e-4012-af13-d22a6731484b)
+
+Sau khi filter xong, mình vào kiểm tra phần conversation
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/b2a7d96b-81ca-400b-8869-8786ffbd4b93)
+
+Tại đây mình thấy số lượng packet mà địa chỉ `10.0.0.130` và `10.0.0.131` giao tiếp với nhau nhiều hơn nên mình sẽ tiến hành fiter tiếp
+
+`ntlmssp.challenge.target_info and ip.addr==10.0.0.131 and ip.addr==10.0.0.130`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/11ea9a07-4eea-4e21-a873-07206982cd9c)
+
+Tiến hành kiểm tra bất kì packet nào có protocol là SMB2, mình đều thấy có dòng này
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/d2339d6d-2ffd-4cee-b819-a8be1a901bd7)
+
+Mình dự đoán đây là flag mà mình cần tìm, mình tiến hành nhập nó vào ô điền flag
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/2cc6c888-76a6-495b-89ed-cb843fc91aa7)
+
+----
+# End of challenge check
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/9fb19a3a-8267-491a-832a-33f1259e4142)
+
+
+--End--
