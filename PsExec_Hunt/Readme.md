@@ -1,11 +1,11 @@
 # PsExec Hunt - Week 2
 ----
-Tool sử dụng trong bài: 
+**Tool sử dụng trong bài**: 
 * Wireshark
 
-Scenario: Hệ thống phát hiện xâm nhập (IDS) của chúng tôi đã đưa ra cảnh báo, cho biết hoạt động chuyển động ngang đáng ngờ liên quan đến việc sử dụng PsExec. Để ứng phó hiệu quả với sự cố này, vai trò của bạn với tư cách SOC là phân tích lưu lượng mạng đã ghi lại được lưu trữ trong tệp PCAP.
+**Scenario**: Hệ thống phát hiện xâm nhập (IDS) của chúng tôi đã đưa ra cảnh báo, cho biết hoạt động chuyển động ngang đáng ngờ liên quan đến việc sử dụng PsExec. Để ứng phó hiệu quả với sự cố này, vai trò của bạn với tư cách SOC là phân tích lưu lượng mạng đã ghi lại được lưu trữ trong tệp PCAP.
 
-Material trong bài:
+**Material trong bài**:
 * File zip -> 1 file PCAP
 * Password giải nén: cyberdefenders.org
 
