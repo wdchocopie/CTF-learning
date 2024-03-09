@@ -34,6 +34,20 @@ Tại đây thì mình tìm được thành phố là Tianjin thì mình thử n
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/4ea6b7ee-851a-4d8f-8cb2-ccc190c2fe08)
 
+**Giải thích lại câu 1**
+
+Mình vào phần Conversation và check IPV4
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/a50df319-3f69-4ca0-a4dc-7f1583667bb7)
+
+Tại đây có 2 địa chỉ ip. Mình quay lại nhìn vào các packet thì thấy
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/357dd04f-23a1-4fd9-a746-c7f5aec7f096)
+
+Tại đây địa chỉ `117.11.88.124` có vẻ đang gửi file về `24.49.63.79`. Dựa theo scenario có thể đây là gửi file mã độc về server của chúng ta. (Tiến hành kiểm tra vị trí của địa chỉ ip này)
+
+-----
+
 ## Câu 2 <a name="c2"></a>  
 Vì câu này hỏi về user-agent, ta sẽ cùng đi tìm hiểu qua user-agent là gì
 Về cơ bản, user-agent là thông tin bạn gửi tới server từ trình duyệt của bạn. Có thể hiểu nó là thứ để định danh bạn. Thông thường thông tim bao gồm:
