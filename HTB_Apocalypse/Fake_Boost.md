@@ -234,7 +234,7 @@ Tại đoạn này ta thu được những thông tin sau
 * `$fullData = $aesManaged.IV + $encryptedData` và `[System.Convert]::ToBase64String($fullData)`
 Đoạn này là full data = IV + encrypt data (hay là bằng data + aes_key) -> convert ra base64
 
-Đoạn `if ($IV)`->`$aesManaged` 
+* Đoạn `if ($IV)`->`$aesManaged` 
 Ta có thể suy ra IV là key nhưng đã bị convert thành base64.
 
 **Giải mã flag**
