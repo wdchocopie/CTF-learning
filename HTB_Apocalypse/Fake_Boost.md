@@ -235,7 +235,7 @@ Tại đoạn này ta thu được những thông tin sau
 Đoạn này là full data = IV + encrypt data (hay là bằng data + aes_key) -> convert ra base64
 
 * Đoạn `if ($IV)`->`$aesManaged` 
-Ta có thể suy ra IV là key nhưng đã bị convert thành base64.
+Ta có thể suy ra IV là key nhưng đã bị convert thành base64. Key ở đây là AES_Key
 
 **Giải mã flag**
 
