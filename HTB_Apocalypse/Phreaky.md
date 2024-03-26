@@ -1,4 +1,4 @@
-![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/07164d67-981f-46f5-9d62-62d4ccd43445)# Phreaky
+# Phreaky
 
 ![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/846c5e0b-0eaa-44f7-b017-61edad4a01e6)
 
