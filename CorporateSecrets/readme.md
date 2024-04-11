@@ -739,3 +739,46 @@ Thử nhập `1276820064`
 ----
 # Câu 34
 
+Trước tiên mình tiến hành tìm file `.docx` được đề cập trong bài
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/c58c7a52-599b-412d-a877-635831d119c4)
+
+Mình thử mở nó lên
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/28fb428f-78e4-4fbc-bd32-42f48b869dc0)
+
+Có lẽ file `.docx` này đã bị ẩn đi ở trong file ta đang nhìn thấy. Mình thử đổi nó thành file zip và xuất nó ra
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/35338ce3-a4d7-451c-962a-e8e300499c1d)
+
+Tại đây có 1 file lạ là file `file.xml`. Mình tiến hành mở nó lên
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/9876473e-900a-4aa9-8d23-c7bd4e0f299d)
+
+Có vẻ như cái này không dúng dạng file lắm. Mình thử kiểm tra bằng lệnh `file`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/837c4e5b-6a57-4da6-baee-5870e5b7ac52)
+
+Đổi lại tên cho đúng định dạng `.docx` và mở nó ra
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/b3d80815-2958-434b-adc3-57674c6b857d)
+
+Vậy Flag là `Customer data is not stored securely`
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/e4343b41-ca1b-46dc-a3af-5f8b20e7213c)
+
+----
+# Câu 35
+
+Thực sự với câu này hoàn toàn không hiểu đề bài. Dựa theo đoán mò và từ hint thì ta có đáp án này
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/bab4454f-c9bf-4766-abe3-b9630c6721a8)
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/01343371-7b3c-4def-adde-3c8d68ed0e1e)
+
+----
+# End Of Challenge Check
+
+![image](https://github.com/wdchocopie/CTF-learning/assets/81132394/e5ca5761-1a30-43a4-9a60-72bd6d9d9351)
+
+**--End--**
