@@ -5,7 +5,7 @@
 
 **Thông tin dược cấp trong bài**: 1 file **zip** có pass giải nén là `cyberdefenders.org`, bên trong có 1 file **pcap**
 
-Link -> [CyberDefemd](https://cyberdefenders.org/blueteam-ctf-challenges/poisonedcredentials/)
+Link -> [CyberDefend](https://cyberdefenders.org/blueteam-ctf-challenges/poisonedcredentials/)
 
 ----
 # Các câu hỏi
